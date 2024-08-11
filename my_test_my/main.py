@@ -8,9 +8,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from utils.settings import settings
 
 
-def main():
+def main(geocode):
     apikey = settings.my_env.apikey
-    geocode = "Люберцы"
     lang = "ru_RU"
 
     url = f"https://geocode-maps.yandex.ru/1.x?apikey={apikey}&geocode={geocode}&lang={lang}&format=json"
@@ -31,4 +30,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    geocode = "Люберцы"
+    main(geocode)
