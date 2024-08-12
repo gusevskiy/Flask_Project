@@ -6,13 +6,14 @@ with open(
     encoding="utf8",
 ) as f:
     data = json.load(f)
+    # print(type(data))
 
 
 def get_all_text_values(data):
-    geo_object = data['response']['GeoObjectCollection']['featureMember']
-
-    for i in geo_object:
-        print(i['GeoObject'])
+    geo_object = data['response']['GeoObjectCollection']['featureMember'][0]['GeoObject']
+    return geo_object['Point']
+    # for i in geo_object:
+    #     print(i['GeoObject'])
 
 
 if __name__ == "__main__":

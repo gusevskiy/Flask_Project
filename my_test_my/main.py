@@ -39,5 +39,5 @@ def main(geocode):
 
 
 if __name__ == "__main__":
-    geocode = "Нижегородская обл. Кстово Паркова 7"
+    geocode = "Россия Нижегородская область Кстово Парковая 1"
     main(geocode)
