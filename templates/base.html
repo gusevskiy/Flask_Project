@@ -7,32 +7,47 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
   </head>
   <body>
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-          <form id="myForm">
-            <input type="text" name="name" placeholder="Enter your name" />
-            <button type="button" onclick="submitForm()">Submit</button>
-          </form>
-          <script>
-            async function submitForm() {
-              const formData = new FormData(document.getElementById('myForm'))
-              const name = formData.get('name')
-            
-              const response = await fetch('/address/post_address', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ name })
-              })
-            
-              const result = await response.json()
-              alert(result.message)
-            }
-          </script>
+    <div class="acontainer">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <form id="myForm">
+              <input type="text" name="country" placeholder="Enter your country" class="form-control mb-3" />
+              <input type="text" name="region" placeholder="Enter your region" class="form-control mb-3" />
+              <input type="text" name="city" placeholder="Enter your city" class="form-control mb-3" />
+              <input type="text" name="street" placeholder="Enter your street" class="form-control mb-3" />
+              <input type="text" name="house" placeholder="Enter your house" class="form-control mb-3" />
+              <button type="button" onclick="submitForm()" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
+    <script>
+      async function submitForm() {
+        const formData = new FormData(document.getElementById('myForm'))
+        const country = formData.get('country')
+        const region = formData.get('region')
+        const city = formData.get('city')
+        const street = formData.get('street')
+        const house = formData.get('house')
+        // Проверка на полноту адреса
+        if (!country || !region || !city || !street || !house) {
+          alert('Please fill in all required fields.')
+          return
+        }
+      
+        const response = await fetch('/address/post_address', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ country: country, region: region, city: city, street: street, house: house })
+        })
+      
+        const result = await response.json()
+        alert(result.message)
+      }
+    </script>
   </body>
 </html>
