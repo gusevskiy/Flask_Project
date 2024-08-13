@@ -70,7 +70,6 @@ def borders_mkad(dict_point: dict) -> str:
         # Находим ближайшую точку на границе МКАД
         nearest_point_on_mkad = nearest_points(mkad_polygon.boundary, point_outside)[0]
         coord_1 = (float(nearest_point_on_mkad.x), float(nearest_point_on_mkad.y))
-        print(coord_1)
         coord_2 = (points_x, points_y)
         # Вызываем ф-ю haversine
         distance = haversine(coord_1, coord_2)
@@ -78,5 +77,6 @@ def borders_mkad(dict_point: dict) -> str:
 
 
 if __name__ == "__main__":
-    dict_point = {"pos": "55.80317963740238 38.98334956464479"}
+    dict_point = {"pos": "37.9836094894409 55.67054905850316"}
+
     print(borders_mkad(dict_point))

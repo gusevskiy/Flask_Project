@@ -8,7 +8,7 @@ from loguru import logger
 from blueprints.address.utils.log_config import setup_logger
 from blueprints.address.utils.settings import settings
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 setup_logger()
 
@@ -32,7 +32,7 @@ def get_text_value(json_obj: dict) -> dict:
         return None
 
 
-def api_geocode(geocode: str) -> dict:
+def api_geocode(address: str) -> dict:
     """
     Ф-я принимает строку с адресом. Отправляет http запрос к сервису API Геокодера
     Пример:
@@ -43,8 +43,9 @@ def api_geocode(geocode: str) -> dict:
     # получаем apikey от сервиса API Геокодер.
     apikey = settings.my_env.apikey
     lang = "ru_RU"
+    results=1  # В зависимости от задачи этот параметр нужно подстраивать под логику процесса
 
-    url = f"https://geocode-maps.yandex.ru/1.x?apikey={apikey}&geocode={geocode}&lang={lang}&format=json"
+    url = f"https://geocode-maps.yandex.ru/1.x?apikey={apikey}&geocode={address}&lang={lang}&results={results}&format=json"
 
     try:
         response = requests.get(url=url)
