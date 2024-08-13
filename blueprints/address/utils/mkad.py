@@ -1,12 +1,14 @@
-from shapely.geometry import Point, Polygon
-from shapely.ops import nearest_points
 import json
 import math
+
+from shapely.geometry import Point, Polygon
+from shapely.ops import nearest_points
 
 
 def haversine(coord1: float, coord2: float) -> float:
     """
-    Эта функция рассчитывает расстояние между двумя точками по их широте и долготе по формуле heversine, представляя Землю как сферу.
+    Эта функция рассчитывает расстояние между двумя точками по их широте и долготе по формуле heversine,
+    представляя Землю как сферу.
     Ф-я получает:
         point1 = (55.767305,37.976100)
         point2 = (55.771974,37.842626)

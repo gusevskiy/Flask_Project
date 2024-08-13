@@ -45,6 +45,7 @@ curl --request POST --header "Content-Type: text/plain; charset=utf-8" --data "y
 #### Тестирование
 
 ```bash
+# Запуск тестов
 python -m unittest -v test_blueprint/test_blueprint.py
 ```
 
@@ -68,5 +69,5 @@ graph TD
 [Примеры от яндекс на JS](https://yandex.ru/dev/maps/jsbox/2.1/multiroute_data_access)  
 [Yandex карты кабинет разработчика](https://yandex.ru/maps-api/products/?from=club)  
 [Flask](https://flask.palletsprojects.com/en/2.0.x/)  
-[Для тестов получить адрес точки на карте с координатами](https://snipp.ru/tools/address-coord)
+[Для тестов получить адрес точки на карте с координатами](https://snipp.ru/tools/address-coord)  
 [Unittests](https://docs.python.org/3/library/unittest.html)
