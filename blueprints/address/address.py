@@ -1,10 +1,12 @@
+import json
+
 from flask import Blueprint, jsonify, request
 from loguru import logger
-import json
-from utils.log_config import setup_logger
 
-from .utils_address.geocode import api_geocode
-from .utils_address.mkad import borders_mkad
+from blueprints.address.utils.log_config import setup_logger
+
+from .utils.geocode import api_geocode
+from .utils.mkad import borders_mkad
 
 setup_logger()
 
@@ -25,11 +27,11 @@ def post_address():
     """
     try:
         # Декодируем кирилицу в cp1251 (utf8 не раскодирует тк разрабатываю на windows)
-        raw_data = request.data.decode('cp1251')
+        raw_data = request.data.decode("cp1251")
         # Строку конвертируем в json
         json_data = json.loads(raw_data)
         # Из json получаем адрес
-        json_obj = json_data.get('address')
+        json_obj = json_data.get("address")
         # Отправляем на API Геокодера.
         geo_object = api_geocode(json_obj)
         # Из полученного json берем только Point среднию точку указанного адреса.

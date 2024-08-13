@@ -5,7 +5,7 @@ import json
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from utils.settings import settings
+from blueprints.address.utils_address.settings import settings
 
 
 def get_text_value(data):

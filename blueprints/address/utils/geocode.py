@@ -1,11 +1,12 @@
-import requests
-import sys
-import os
 import json
-from loguru import logger
-from utils.log_config import setup_logger
-from utils.settings import settings
+import os
+import sys
 
+import requests
+from loguru import logger
+
+from blueprints.address.utils.log_config import setup_logger
+from blueprints.address.utils.settings import settings
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
@@ -19,10 +20,12 @@ def get_text_value(json_obj: dict) -> dict:
     """
     try:
         # Берем из структуры json только первый GeoObject, тк передпологаем что он у нас один
-        # потому что есть валидация адресса в форме ввода. 
+        # потому что есть валидация адресса в форме ввода.
         # Их может быть несколько если адрес указан не точно и вернется несколько похожиж локаций
         # по умочанию 10, можно указать опционально кол-во "results=5"
-        geo_object = json_obj['response']['GeoObjectCollection']['featureMember'][0]['GeoObject']
+        geo_object = json_obj["response"]["GeoObjectCollection"]["featureMember"][0][
+            "GeoObject"
+        ]
         return geo_object
     except (IndexError, KeyError) as e:
         logger.error("Ошибка в структуре файла json", str(e))
@@ -52,7 +55,9 @@ def api_geocode(geocode: str) -> dict:
             # Возвращаем JSON
             return get_text_value(json_obj)
         else:
-            logger.warning("Статус ответа API геокодера не 200 = ", response.status_code)
+            logger.warning(
+                "Статус ответа API геокодера не 200 = ", response.status_code
+            )
             return None
     except requests.exceptions.RequestException as e:
-        logger.error("Ошибка запроса к API Геокодера:", str(e) )
+        logger.error("Ошибка запроса к API Геокодера:", str(e))
