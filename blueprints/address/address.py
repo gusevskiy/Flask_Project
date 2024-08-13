@@ -26,11 +26,11 @@ def post_address():
         "До адреса "Ваш адрес" растояние от МКАДА = 2.85 км"
     """
     try:
-        address = request.data  # Используем request.data для извлечения строки
-        print(len(address))
+        address = request.data.decode("utf-8")  # Используем request.data для извлечения строки
         if not address or len(address) < 3:
             logger.error("address is None!")
             return "address is None!", 400
+        logger.info("Получен адрес: ", address)
         geo_object = api_geocode(address)  # Отправляем на API Геокодера.
         # Из полученного json берем только Point среднию точку указанного адреса.
         point = geo_object["Point"]

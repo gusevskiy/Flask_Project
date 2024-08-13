@@ -22,12 +22,12 @@ def get_text_value(json_obj: dict) -> dict:
         # Берем из структуры json только первый GeoObject, тк передпологаем что он у нас один
         # потому что есть валидация адресса в форме ввода.
         # Их может быть несколько если адрес указан не точно и вернется несколько похожиж локаций
-        # по умочанию 10, можно указать опционально кол-во "results=5"
+        # по умочанию 10, можно указать опционально кол-во "results=5" или 1
         geo_object = json_obj["response"]["GeoObjectCollection"]["featureMember"][0][
             "GeoObject"
         ]
         return geo_object
-    except (IndexError, KeyError) as e:
+    except Exception as e:
         logger.error("Ошибка в структуре файла json", str(e))
         return None
 
@@ -43,9 +43,9 @@ def api_geocode(address: str) -> dict:
     # получаем apikey от сервиса API Геокодер.
     apikey = settings.my_env.apikey
     lang = "ru_RU"
-    results=1  # В зависимости от задачи этот параметр нужно подстраивать под логику процесса
+    results = 1  # В зависимости от задачи этот параметр нужно подстраивать под логику процесса
 
-    url = f"https://geocode-maps.yandex.ru/1.x?apikey={apikey}&geocode={address}&lang={lang}&results={results}&format=json"
+    url = f"https://geocode-maps.yandex.ru/1.x?apikey={apikey}&geocode={address}&lang={lang}&format=json"
 
     try:
         response = requests.get(url=url)
