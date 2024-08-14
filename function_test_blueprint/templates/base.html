@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+  </head>
+  <body>
+    <div class="acontainer d-flex justify-content-center align-items-center" style="height: 100vh;">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <form id="myForm">
+              <input type="text" name="address" placeholder="Enter your address" class="form-control mb-3" />
+              <button type="button" onclick="submitForm()" class="btn btn-primary">Submit</button>
+            </form>
+            <div id="result" class="mt-3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      async function submitForm() {
+        const formData = new FormData(document.getElementById('myForm'))
+        const address = formData.get('address')
+      
+        // Проверка на полноту адреса
+        if (!address) {
+          alert('Please fill in all required fields.')
+          return
+        }
+      
+        // Вывод данных формы в консоль
+        console.log('Form Data:', { address })
+      
+        const response = await fetch('/address/post_address', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+          },
+          body: JSON.stringify({ address: address })
+        })
+      
+        const result = await response.json()
+        console.log('Response:', result)
+      
+        // Вывод результата под формой
+        document.getElementById('result').innerText = result.message
+      }
+    </script>
+  </body>
+</html>
