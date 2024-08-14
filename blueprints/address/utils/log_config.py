@@ -11,5 +11,5 @@ def setup_logger():
     logger.add(
         os.path.join(log_directory, "file_{time:YYYY-MM-DD}.log"),
         rotation="1 day",
-        level="DEBUG",
+        level="INFO",
     )

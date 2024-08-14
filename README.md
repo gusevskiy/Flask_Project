@@ -49,7 +49,11 @@ app.register_blueprint(address, url_prefix="/post_address")
 
 ```bash
 # Пример curl запроса
-curl --request POST --header "Content-Type: text/plain; charset=utf-8" --data "your_address" http://"your_host":"your_port"/address/post_address
+curl 
+--request POST \
+--header "Content-Type: application/json" \
+--data '{"address": "your_address"}' \
+http://"your_host":"your_port"/address/post_address
 ```
 
 #### Тестирование
@@ -58,6 +62,10 @@ curl --request POST --header "Content-Type: text/plain; charset=utf-8" --data "y
 # Запуск тестов
 python -m unittest -v test_blueprint/test_blueprint.py
 ```
+Можно запустить тестирование через форму в браузере.
+перейдите в папку `cd function_test_blueprint` выполните команду `flask run` 
+по адресу `hhttp://localhost:5000/address/post_address` 
+будет доступна форма в которую нужно ввести адрес и получить результат.
 
 #### Стек технологий
 
@@ -75,8 +83,11 @@ graph TD
 ```
 #### Дополнительные решения.
 1) Изменение метода расчета растояния от МКАД до адреса. Для определения растояния по пути следования, например авто дороге. Можно подключить матрицу растояний от [API Яндекс Карты](https://yandex.ru/maps-api/products/distancematrix-api)
-2) В зависимости от задачи можно ограничить область для расчета растояния. Нипример только московской областью или задать принудительные точки координат за приделами которых поиск не осуществляется.  
-3) Проработать работу с JSON файлом. В нем возращается от API Геокодера гораздо больше информации.
+2) В зависимости от задачи можно ограничить область для расчета растояния. Нипример только московской областью или задать принудительные точки координат за приделами которых поиск не осуществляется. 
+
+#### Дополнить 
+* Проработать работу с JSON файлом. В нем возращается от API Геокодера гораздо больше информации.
+* Не настроены уровни логирования.
 
 
 #### Используемые резурсы

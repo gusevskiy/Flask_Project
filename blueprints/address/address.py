@@ -48,14 +48,14 @@ def post_address():
         # Обработка JSON
         try:
             json_data = json.loads(data)
-            logger.info(json_data)
+            logger.debug(json_data)
         except json.JSONDecodeError:
             logger.error("Invalid JSON data")
             return jsonify({"error": "Invalid JSON data"}), 400
         # Получаем "адрес"
         try:
             address = json_data["address"]
-            logger.info(address)
+            logger.debug(address)
         except KeyError as e:
             logger.error("Key address not found")
             return ({"error": "Key address not found"})
@@ -71,18 +71,16 @@ def post_address():
         if not ADDRESS_REGEX.match(address):
             logger.error("Invalid address format")
             return jsonify({"error": "Invalid address format"}), 400
-
-        # print(address)
+        # дальше по логике
         geo_object = api_geocode(address)  # Отправляем на API Геокодера.
         # Из полученного json берем только Point среднию точку указанного адреса.
         point = geo_object["Point"]
-        logger.info(point)
+        logger.debug(point)
         # Полученый словарь отправляем на определения нахождения относительно МКАД.
         distance = borders_mkad(point)
         logger.info(f"До адреса '{address}' {distance}")
         # Возвращаем результат, он возвращается в ответе на запрос.
-        return f"До адреса '{address}' {distance}"
-        # return f"До адреса '{address}'"
+        return jsonify({"message": f"До адреса '{address}' {distance}"}), 200
     except Exception as e:
         # Ловим общие ошибки по Blueprint.
         logger.error(f"Ошибка Blueprint {str(e)}")
