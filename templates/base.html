@@ -24,21 +24,28 @@
       async function submitForm() {
         const formData = new FormData(document.getElementById('myForm'))
         const address = formData.get('address')
+
         // Проверка на полноту адреса
         if (!address) {
           alert('Please fill in all required fields.')
           return
         }
-      
+
+        // Вывод данных формы в консоль
+        console.log('Form Data:', { address })
+
         const response = await fetch('/address/post_address', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json; charset=UTF-8' 
           },
           body: JSON.stringify({ address: address })
         })
-      
+
         const result = await response.json()
+
+
+
         document.getElementById('result').innerText = result.message
       }
     </script>

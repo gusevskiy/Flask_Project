@@ -56,7 +56,7 @@ def borders_mkad(dict_point: dict) -> str:
     points_x = float(dict_point.get("pos").split()[1])
     points_y = float(dict_point.get("pos").split()[0])
     with open(
-        r"C:\DEV_python\Test_Task\Logik_Flask\Flask_Project\my_test_my\mkad.json", "r"
+        r"C:\DEV_python\Test_Task\Logik_Flask\Flask_Project\blueprints\address\utils\mkad.json", "r"
     ) as f:
         data = json.load(f)
     # Берем элемент содержащий все координаты МКАДа.
