@@ -18,8 +18,8 @@ address = Blueprint("address", __name__)
 def post_address():
     """
     Обработка запросов POST к маршруту /post_address.
-    Принимает JSON:
-        curl --request POST --header "Content-Type: text/plain" --data "Ваш адрес" http://localhost:5000/address/post_address
+    Принимает строку:
+        curl --request POST --header "Content-Type: text/plain; charset=utf-8" --data "Ваш адрес" http://localhost:5000/address/post_address
     Blueprint:
         Часть адреса: "address"
     Возвращает string:
